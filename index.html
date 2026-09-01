@@ -307,7 +307,16 @@
         link.setAttribute("download", `spis_${document.getElementById('nr_spisu').value || 'nowy'}_${new Date().toISOString().slice(0,10)}.csv`);
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);
+       document.body.removeChild(link);
+    } // <-- TU BYŁ BRAKUJĄCY NAWIAS ZAMYKAJĄCY FUNKCJĘ downloadCSV
+
+    // Rejestracja pliku Service Worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(() => console.log('Aplikacja gotowa do pracy offline!'))
+                .catch(err => console.log('Błąd PWA:', err));
+        });
     }
 </script>
 </body>
