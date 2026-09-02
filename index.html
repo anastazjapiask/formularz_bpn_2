@@ -146,7 +146,7 @@
 <script>
     document.getElementById('data').valueAsDate = new Date();
 
-    // Definicje list
+    // 1. LISTY GATUNKÓW
     const g_list = [
         "Andromeda polifolia", "Baeothryon alpinum", "Calla palustris", "Carex chordorrhiza", 
         "Carex diandra", "Carex dioica", "Carex flava s.l.", "Carex lasiocarpa", 
@@ -174,10 +174,19 @@
         "Phragmites australis", "Poa pratensis", "Thelypteris palustris"
     ];
     
+    // Poprawiona i całkowicie posortowana alfabetycznie znt_list (C, C, C, E, F, L, M, P, P, T, U)
     const znt_list = [
-        "Calamagrostis canesens", "Cirsium palustre", "Cirsium rivulare", "Eupatorium cannabinum", 
-        "Filipendula ulmaria", "Lysimachia vulgaris", "Molinia caerulea", "Phalaris arundinacea", 
-        "Phragmites australis", "Typha latifolia", "Urtica dioica"
+        "Calamagrostis canescens", 
+        "Cirsium palustre", 
+        "Cirsium rivulare", 
+        "Eupatorium cannabinum", 
+        "Filipendula ulmaria", 
+        "Lysimachia vulgaris", 
+        "Molinia caerulea", 
+        "Phalaris arundinacea", 
+        "Phragmites australis", 
+        "Typha latifolia", 
+        "Urtica dioica"
     ];
     
     const mech_list = [
@@ -193,17 +202,23 @@
         "Salix nigricans", "Salix pentandra", "Salix rosmarinifolia"
     ];
 
-    // Wymuszenie sortowania alfabetycznego (A-Z) dla każdej tablicy przed wyrenderowaniem
-    g_list.sort((a, b) => a.localeCompare(b));
-    ginne_list.sort((a, b) => a.localeCompare(b));
-    dom_list.sort((a, b) => a.localeCompare(b));
-    znt_list.sort((a, b) => a.localeCompare(b));
-    mech_list.sort((a, b) => a.localeCompare(b));
-    drzewa_list.sort((a, b) => a.localeCompare(b));
-
+    // Funkcja porządkująca ID
     function cleanId(str) { return str.toLowerCase().replace(/[^a-z0-9]/g, "_"); }
 
-    // Generowanie pól
+    // Funkcja gwarantująca dokładne sortowanie alfabetyczne bez względu na wielkość liter
+    function sortAlphabetically(arr) {
+        return arr.sort((a, b) => a.localeCompare(b, 'pl', { sensitivity: 'base' }));
+    }
+
+    // Sortowanie wszystkich tablic przed podpięciem pod HTML
+    sortAlphabetically(g_list);
+    sortAlphabetically(ginne_list);
+    sortAlphabetically(dom_list);
+    sortAlphabetically(znt_list);
+    sortAlphabetically(mech_list);
+    sortAlphabetically(drzewa_list);
+
+    // Generowanie HTML
     const cg = document.getElementById('container_g');
     g_list.forEach(g => { 
         cg.innerHTML += `<div class="col-md-4"><label class="form-label">${g}</label><input type="number" id="g_${cleanId(g)}" class="form-control" value="0"></div>`; 
