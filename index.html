@@ -72,7 +72,7 @@
             <div class="row g-2" id="container_g"></div>
             <textarea id="uwagi_sec_3_g" class="form-control mt-2" rows="2" placeholder="Uwagi do listy G"></textarea>
             <hr>
-            <h5>Gatunki wskaźnikowe z innych list - charakterystyczne dla innych siedlisk N2000</h5>
+            <h5>Inne gatunki wskaźnikowe</h5>
             <div class="row g-2" id="container_ginne"></div>
             <textarea id="uwagi_sec_3" class="form-control mt-2" rows="2" placeholder="Uwagi pozostałe"></textarea>
         </div>
@@ -146,7 +146,7 @@
 <script>
     document.getElementById('data').valueAsDate = new Date();
 
-    // 1. LISTY GATUNKÓW
+    // Wyczyszczone i w 100% uporządkowane alfabetycznie listy źródłowe (A-Z)
     const g_list = [
         "Andromeda polifolia", "Baeothryon alpinum", "Calla palustris", "Carex chordorrhiza", 
         "Carex diandra", "Carex dioica", "Carex flava s.l.", "Carex lasiocarpa", 
@@ -157,7 +157,7 @@
         "Pedicularis palustris", "Pedicularis scep-carolin.", "Saxifraga hirculus", 
         "Triglochin palustre", "Vaccinium uliginosum", "Valeriana dioica"
     ];
-    
+
     const ginne_list = [
         "Arrhenatherum elatius", "Calluna vulgaris", "Caltha palustris", "Carex cespitosa", 
         "Carex nigra", "Carex panicea", "Cirsium oleraceum", "Cladonia spp", 
@@ -167,85 +167,67 @@
         "Selinum carvifolia", "Succisa pratensis", "Thalictrum flavum", "Thalictrum lucidum", 
         "Valeriana officinalis", "Veronica longifolia"
     ];
-    
+
     const dom_list = [
         "Calamagrostis stricta", "Carex appropinquata", "Carex elata", "Carex lasiocarpa", 
         "Eupatorium cannabinum", "Festuca rubra", "Filipendula ulmaria", "Lysimachia vulgaris", 
         "Phragmites australis", "Poa pratensis", "Thelypteris palustris"
     ];
-    
-    // Poprawiona i całkowicie posortowana alfabetycznie znt_list (C, C, C, E, F, L, M, P, P, T, U)
+
     const znt_list = [
-        "Calamagrostis canescens", 
-        "Cirsium palustre", 
-        "Cirsium rivulare", 
-        "Eupatorium cannabinum", 
-        "Filipendula ulmaria", 
-        "Lysimachia vulgaris", 
-        "Molinia caerulea", 
-        "Phalaris arundinacea", 
-        "Phragmites australis", 
-        "Typha latifolia", 
-        "Urtica dioica"
+        "Calamagrostis canescens", "Cirsium palustre", "Cirsium rivulare", "Eupatorium cannabinum", 
+        "Filipendula ulmaria", "Lysimachia vulgaris", "Molinia caerulea", "Phalaris arundinacea", 
+        "Phragmites australis", "Typha latifolia", "Urtica dioica"
     ];
-    
+
     const mech_list = [
         "Aulacomnium palustre", "Brachythecium sp.", "Bryum pseudotriquetrum", "Calliergonella cuspidata", 
         "Campylium stellatum", "Climacium dendroides", "Fissidens adianthoides", "Hamatocaulis vernicosus", 
         "Helodium blandowii", "Limprichtia cossonii", "Paludella squarosa", "Plagiomnium sp.", 
         "Sphagnum spp cienkie", "Sphagnum spp grube", "Tomentypnum nitens"
     ];
-    
+
     const drzewa_list = [
         "Alnus glutinosa", "Betula humilis", "Betula pendula", "Betula pubescens", 
         "Frangula alnus", "Pinus sylvestris", "Salix aurita", "Salix cinerea", 
         "Salix nigricans", "Salix pentandra", "Salix rosmarinifolia"
     ];
 
-    // Funkcja porządkująca ID
     function cleanId(str) { return str.toLowerCase().replace(/[^a-z0-9]/g, "_"); }
 
-    // Funkcja gwarantująca dokładne sortowanie alfabetyczne bez względu na wielkość liter
-    function sortAlphabetically(arr) {
-        return arr.sort((a, b) => a.localeCompare(b, 'pl', { sensitivity: 'base' }));
+    // Wybór bezwzględnego sortowania alfabetycznego (localeCompare)
+    function getSorted(arr) {
+        return [...arr].sort((a, b) => a.localeCompare(b, 'pl', { sensitivity: 'base' }));
     }
 
-    // Sortowanie wszystkich tablic przed podpięciem pod HTML
-    sortAlphabetically(g_list);
-    sortAlphabetically(ginne_list);
-    sortAlphabetically(dom_list);
-    sortAlphabetically(znt_list);
-    sortAlphabetically(mech_list);
-    sortAlphabetically(drzewa_list);
-
-    // Generowanie HTML
+    // Generowanie HTML na podstawie posortowanych tablic
     const cg = document.getElementById('container_g');
-    g_list.forEach(g => { 
+    getSorted(g_list).forEach(g => { 
         cg.innerHTML += `<div class="col-md-4"><label class="form-label">${g}</label><input type="number" id="g_${cleanId(g)}" class="form-control" value="0"></div>`; 
     });
 
     const cginne = document.getElementById('container_ginne');
-    ginne_list.forEach(g => {
+    getSorted(ginne_list).forEach(g => {
         cginne.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="ginne_pct_${cleanId(g)}" class="form-control form-control-sm" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input" type="checkbox" id="ginne_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
     });
 
     const cdom = document.getElementById('container_dom');
-    dom_list.forEach(g => {
+    getSorted(dom_list).forEach(g => {
         cdom.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="dom_pct_${cleanId(g)}" class="form-control form-control-sm" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input" type="checkbox" id="dom_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
     });
 
     const cznt = document.getElementById('container_znt');
-    znt_list.forEach(g => {
+    getSorted(znt_list).forEach(g => {
         cznt.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="znt_pct_${cleanId(g)}" class="form-control form-control-sm" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input" type="checkbox" id="znt_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
     });
 
     const cmech = document.getElementById('container_mech');
-    mech_list.forEach(m => { 
+    getSorted(mech_list).forEach(m => { 
         cmech.innerHTML += `<div class="col-md-4"><div class="item-box"><div class="form-check"><input class="form-check-input" type="checkbox" id="mech_${cleanId(m)}"><label class="form-check-label fw-bold" for="mech_${cleanId(m)}">${m}</label></div></div></div>`; 
     });
 
     const cdrzewa = document.getElementById('container_drzewa');
-    drzewa_list.forEach(d => {
+    getSorted(drzewa_list).forEach(d => {
         const id = cleanId(d);
         cdrzewa.innerHTML += `<div class="tree-box"><strong class="text-success fs-5">${d}</strong><div class="row g-2 mt-1"><div class="col-3"><label class="form-label text-muted small">A %</label><input type="number" id="d_A_pct_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 %</label><input type="number" id="d_B1_pct_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 %</label><input type="number" id="d_B2_pct_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">C %</label><input type="number" id="d_C_pct_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">A h(m)</label><input type="number" id="d_A_h_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 h(m)</label><input type="number" id="d_B1_h_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 h(m)</label><input type="number" id="d_B2_h_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">C h(m)</label><input type="number" id="d_C_h_${id}" class="form-control" value="0"></div></div></div>`;
     });
@@ -254,34 +236,34 @@
         let headers = ["Data","Wykonawca","Nr_Spisu","Waypoint","Foto_Pogladowe","Foto_Runi","Komentarz_Sec_1","Pokrycie_D_pct","Pokrycie_C_pct","Mchy_Inne_pct","Torfowce_pct","Wojlok_pct","Struktura_Kepkowa_pct","Udzial_Kep_pct","Srednia_Wys_Trzonow_cm","Uwilgotnienie","Komentarz_Sec_2"];
         let row = [`"${document.getElementById('data').value}"`,`"${document.getElementById('wykonawca').value}"`,`"${document.getElementById('nr_spisu').value}"`,`"${document.getElementById('nr_waypoint').value}"`,`"${document.getElementById('foto_poglad').checked ? 'TAK' : 'NIE'}"`,`"${document.getElementById('foto_runi').checked ? 'TAK' : 'NIE'}"`,`"${document.getElementById('uwagi_sec_1').value}"`,document.getElementById('pokrycie_d').value,document.getElementById('pokrycie_c').value,document.getElementById('mchy_inne').value,document.getElementById('torfowce').value,document.getElementById('wojlok').value,document.getElementById('kepkowa_pct').value,document.getElementById('udzial_kep_pct').value,document.getElementById('trzony_wys').value,`"${document.getElementById('uwilgotnienie').value}"`,`"${document.getElementById('uwagi_sec_2').value}"`];
 
-        g_list.forEach(g => { headers.push(`"${g} %"`); row.push(document.getElementById(`g_${cleanId(g)}`).value); });
+        getSorted(g_list).forEach(g => { headers.push(`"${g} %"`); row.push(document.getElementById(`g_${cleanId(g)}`).value); });
         headers.push('"Komentarz_Gatunki_G"'); row.push(`"${document.getElementById('uwagi_sec_3_g').value}"`);
 
-        ginne_list.forEach(g => {
+        getSorted(ginne_list).forEach(g => {
             headers.push(`"${g} %"`); row.push(document.getElementById(`ginne_pct_${cleanId(g)}`).value);
             headers.push(`"${g} [E]"`); row.push(`"${document.getElementById(`ginne_exp_${cleanId(g)}`).checked ? 'E' : ''}"`);
         });
         headers.push('"Komentarz_Sec_3"'); row.push(`"${document.getElementById('uwagi_sec_3').value}"`);
 
-        dom_list.forEach(g => { 
+        getSorted(dom_list).forEach(g => { 
             headers.push(`"${g} (Dom) %"`); row.push(document.getElementById(`dom_pct_${cleanId(g)}`).value); 
             headers.push(`"${g} (Dom) [E]"`); row.push(`"${document.getElementById(`dom_exp_${cleanId(g)}`).checked ? 'E' : ''}"`);
         });
         headers.push('"Komentarz_Dominujace"'); row.push(`"${document.getElementById('uwagi_sec_4_dom').value}"`);
 
-        znt_list.forEach(g => {
+        getSorted(znt_list).forEach(g => {
             headers.push(`"${g} %"`); row.push(document.getElementById(`znt_pct_${cleanId(g)}`).value);
             headers.push(`"${g} [E]"`); row.push(`"${document.getElementById(`znt_exp_${cleanId(g)}`).checked ? 'E' : ''}"`);
         });
         headers.push('"Komentarz_Sec_4"'); row.push(`"${document.getElementById('uwagi_sec_4').value}"`);
 
-        mech_list.forEach(m => { 
+        getSorted(mech_list).forEach(m => { 
             headers.push(`"${m}"`); 
             row.push(`"${document.getElementById(`mech_${cleanId(m)}`).checked ? 'TAK' : 'NIE'}"`); 
         });
         headers.push('"Komentarz_Sec_5"'); row.push(`"${document.getElementById('uwagi_sec_5').value}"`);
 
-        drzewa_list.forEach(d => {
+        getSorted(drzewa_list).forEach(d => {
             const id = cleanId(d);
             headers.push(`"${d} A %"`,`"${d} A h(m)"`,`"${d} B1 %"`,`"${d} B1 h(m)"`,`"${d} B2 %"`,`"${d} B2 h(m)"`,`"${d} C %"`,`"${d} C h(m)"`);
             row.push(document.getElementById(`d_A_pct_${id}`).value, document.getElementById(`d_A_h_${id}`).value, document.getElementById(`d_B1_pct_${id}`).value, document.getElementById(`d_B1_h_${id}`).value, document.getElementById(`d_B2_pct_${id}`).value, document.getElementById(`d_B2_h_${id}`).value, document.getElementById(`d_C_pct_${id}`).value, document.getElementById(`d_C_h_${id}`).value);
