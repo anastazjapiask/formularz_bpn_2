@@ -146,18 +146,52 @@
 <script>
     document.getElementById('data').valueAsDate = new Date();
 
-    // Listy gatunków z automatycznym sortowaniem alfabetycznym (.sort())
-    const g_list = ["Andromeda polifolia", "Baeothryon alpinum", "Calla palustris", "Carex chordorrhiza", "Carex diandra", "Carex dioica", "Carex flava s.l.", "Carex lasiocarpa", "Carex limosa", "Carex rostrata", "Comarum palustre", "Dactylorhiza incarnata", "Dactylorhiza incarnata subsp. Ochroleuca", "Drosera rotundifolia", "Epipactis palustris", "Eriophorum angustifolium", "Eriophorum latifolium", "Juncus alpino-articulatus", "Liparis loeselii", "Menyanthes trifoliata", "Oxycoccus palustris", "Parnassia palustris", "Pedicularis palustris", "Pedicularis scep-carolin.", "Saxifraga hirculus", "Triglochin palustre", "Vaccinium uliginosum", "Valeriana dioica"].sort();
+    // Każda lista została uszeregowana ściśle alfabetycznie
+    const g_list = [
+        "Andromeda polifolia", "Baeothryon alpinum", "Calla palustris", "Carex chordorrhiza", 
+        "Carex diandra", "Carex dioica", "Carex flava s.l.", "Carex lasiocarpa", 
+        "Carex limosa", "Carex rostrata", "Comarum palustre", "Dactylorhiza incarnata", 
+        "Dactylorhiza incarnata subsp. Ochroleuca", "Drosera rotundifolia", "Epipactis palustris", 
+        "Eriophorum angustifolium", "Eriophorum latifolium", "Juncus alpino-articulatus", 
+        "Liparis loeselii", "Menyanthes trifoliata", "Oxycoccus palustris", "Parnassia palustris", 
+        "Pedicularis palustris", "Pedicularis scep-carolin.", "Saxifraga hirculus", 
+        "Triglochin palustre", "Vaccinium uliginosum", "Valeriana dioica"
+    ];
     
-    const ginne_list = ["Carex cespitosa", "Carex nigra", "Carex panicea", "Crepis paludosa", "Galium boreale", "Linum catharticum", "Lychnis flos-cuculi", "Molinia caerulea", "Polygonum bistorta", "Succisa pratensis", "Valeriana officinalis", "Thalictrum lucidum", "Thalictrum flavum", "Selinum carvifolia", "Lathyrus palustris", "Veronica longifolia", "Calluna vulgaris", "Cladonia spp", "Hypericum maculatum", "Juniperus communis", "Caltha palustris", "Cirsium oleraceum", "Scirpus sylvaticus", "Arrhenatherum elatius", "Lathyrus pratensis", "Rhinanthus spp."].sort();
+    const ginne_list = [
+        "Arrhenatherum elatius", "Calluna vulgaris", "Caltha palustris", "Carex cespitosa", 
+        "Carex nigra", "Carex panicea", "Cirsium oleraceum", "Cladonia spp", 
+        "Crepis paludosa", "Galium boreale", "Hypericum maculatum", "Juniperus communis", 
+        "Lathyrus palustris", "Lathyrus pratensis", "Linum catharticum", "Lychnis flos-cuculi", 
+        "Molinia caerulea", "Polygonum bistorta", "Rhinanthus spp.", "Scirpus sylvaticus", 
+        "Selinum carvifolia", "Succisa pratensis", "Thalictrum flavum", "Thalictrum lucidum", 
+        "Valeriana officinalis", "Veronica longifolia"
+    ];
     
-    const dom_list = ["Calamagrostis stricta", "Carex appropinquata", "Carex elata", "Festuca rubra", "Filipendula ulmaria", "Lysimachia vulgaris", "Poa pratensis", "Thelypteris palustris", "Phragmites australis", "Carex lasiocarpa", "Eupatorium cannabinum"].sort();
+    const dom_list = [
+        "Calamagrostis stricta", "Carex appropinquata", "Carex elata", "Carex lasiocarpa", 
+        "Eupatorium cannabinum", "Festuca rubra", "Filipendula ulmaria", "Lysimachia vulgaris", 
+        "Phragmites australis", "Poa pratensis", "Thelypteris palustris"
+    ];
     
-    const znt_list = ["Lysimachia vulgaris", "Eupatorium cannabinum", "Filipendula ulmaria", "Phragmites australis", "Phalaris arundinacea", "Typha latifolia", "Urtica dioica", "Calamagrostis canesens", "Cirsium palustre", "Cirsium rivulare", "Molinia caerulea"].sort();
+    const znt_list = [
+        "Calamagrostis canesens", "Cirsium palustre", "Cirsium rivulare", "Eupatorium cannabinum", 
+        "Filipendula ulmaria", "Lysimachia vulgaris", "Molinia caerulea", "Phalaris arundinacea", 
+        "Phragmites australis", "Typha latifolia", "Urtica dioica"
+    ];
     
-    const mech_list = ["Aulacomnium palustre", "Campylium stellatum", "Fissidens adianthoides", "Hamatocaulis vernicosus", "Helodium blandowii", "Limprichtia cossonii", "Paludella squarosa", "Sphagnum spp cienkie", "Sphagnum spp grube", "Tomentypnum nitens", "Brachythecium sp.", "Bryum pseudotriquetrum", "Calliergonella cuspidata", "Climacium dendroides", "Plagiomnium sp."].sort();
+    const mech_list = [
+        "Aulacomnium palustre", "Brachythecium sp.", "Bryum pseudotriquetrum", "Calliergonella cuspidata", 
+        "Campylium stellatum", "Climacium dendroides", "Fissidens adianthoides", "Hamatocaulis vernicosus", 
+        "Helodium blandowii", "Limprichtia cossonii", "Paludella squarosa", "Plagiomnium sp.", 
+        "Sphagnum spp cienkie", "Sphagnum spp grube", "Tomentypnum nitens"
+    ];
     
-    const drzewa_list = ["Alnus glutinosa", "Betula humilis", "Betula pendula", "Betula pubescens", "Frangula alnus", "Pinus sylvestris", "Salix cinerea", "Salix nigricans", "Salix pentandra", "Salix rosmarinifolia", "Salix aurita"].sort();
+    const drzewa_list = [
+        "Alnus glutinosa", "Betula humilis", "Betula pendula", "Betula pubescens", 
+        "Frangula alnus", "Pinus sylvestris", "Salix aurita", "Salix cinerea", 
+        "Salix nigricans", "Salix pentandra", "Salix rosmarinifolia"
+    ];
 
     function cleanId(str) { return str.toLowerCase().replace(/[^a-z0-9]/g, "_"); }
 
