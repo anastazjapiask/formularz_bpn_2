@@ -154,8 +154,6 @@
 </div>
 
 <script>
-    document.getElementById('data').valueAsDate = new Date();
-
     const g_list = [
         "Andromeda polifolia", "Baeothryon alpinum", "Calla palustris", "Carex chordorrhiza", 
         "Carex diandra", "Carex dioica", "Carex flava s.l.", "Carex lasiocarpa", 
@@ -205,39 +203,51 @@
     function cleanId(str) { return str.toLowerCase().replace(/[^a-z0-9]/g, "_"); }
     function getSorted(arr) { return [...arr].sort((a, b) => a.localeCompare(b, 'pl', { sensitivity: 'base' })); }
 
-    // Generowanie HTML
-    const cg = document.getElementById('container_g');
-    getSorted(g_list).forEach(g => { 
-        cg.innerHTML += `<div class="col-md-4"><label class="form-label">${g}</label><input type="number" id="g_${cleanId(g)}" class="form-control auto-save" value="0"></div>`; 
-    });
+    // 1. GENEROWANIE DYNAMICZNYCH PÓŁ
+    function generateFormFields() {
+        const cg = document.getElementById('container_g');
+        cg.innerHTML = '';
+        getSorted(g_list).forEach(g => { 
+            cg.innerHTML += `<div class="col-md-4"><label class="form-label">${g}</label><input type="number" id="g_${cleanId(g)}" class="form-control auto-save" value="0"></div>`; 
+        });
 
-    const cginne = document.getElementById('container_ginne');
-    getSorted(ginne_list).forEach(g => {
-        cginne.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="ginne_pct_${cleanId(g)}" class="form-control form-control-sm auto-save" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input auto-save" type="checkbox" id="ginne_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
-    });
+        const cginne = document.getElementById('container_ginne');
+        cginne.innerHTML = '';
+        getSorted(ginne_list).forEach(g => {
+            cginne.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="ginne_pct_${cleanId(g)}" class="form-control form-control-sm auto-save" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input auto-save" type="checkbox" id="ginne_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
+        });
 
-    const cdom = document.getElementById('container_dom');
-    getSorted(dom_list).forEach(g => {
-        cdom.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="dom_pct_${cleanId(g)}" class="form-control form-control-sm auto-save" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input auto-save" type="checkbox" id="dom_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
-    });
+        const cdom = document.getElementById('container_dom');
+        cdom.innerHTML = '';
+        getSorted(dom_list).forEach(g => {
+            cdom.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="dom_pct_${cleanId(g)}" class="form-control form-control-sm auto-save" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input auto-save" type="checkbox" id="dom_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
+        });
 
-    const cznt = document.getElementById('container_znt');
-    getSorted(znt_list).forEach(g => {
-        cznt.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="znt_pct_${cleanId(g)}" class="form-control form-control-sm auto-save" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input auto-save" type="checkbox" id="znt_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
-    });
+        const cznt = document.getElementById('container_znt');
+        cznt.innerHTML = '';
+        getSorted(znt_list).forEach(g => {
+            cznt.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="znt_pct_${cleanId(g)}" class="form-control form-control-sm auto-save" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input auto-save" type="checkbox" id="znt_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
+        });
 
-    const cmech = document.getElementById('container_mech');
-    getSorted(mech_list).forEach(m => { 
-        cmech.innerHTML += `<div class="col-md-4"><div class="item-box"><div class="form-check"><input class="form-check-input auto-save" type="checkbox" id="mech_${cleanId(m)}"><label class="form-check-label fw-bold" for="mech_${cleanId(m)}">${m}</label></div></div></div>`; 
-    });
+        const cmech = document.getElementById('container_mech');
+        cmech.innerHTML = '';
+        getSorted(mech_list).forEach(m => { 
+            cmech.innerHTML += `<div class="col-md-4"><div class="item-box"><div class="form-check"><input class="form-check-input auto-save" type="checkbox" id="mech_${cleanId(m)}"><label class="form-check-label fw-bold" for="mech_${cleanId(m)}">${m}</label></div></div></div>`; 
+        });
 
-    const cdrzewa = document.getElementById('container_drzewa');
-    getSorted(drzewa_list).forEach(d => {
-        const id = cleanId(d);
-        cdrzewa.innerHTML += `<div class="tree-box"><strong class="text-success fs-5">${d}</strong><div class="row g-2 mt-1"><div class="col-3"><label class="form-label text-muted small">A %</label><input type="number" id="d_A_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 (2-6m) %</label><input type="number" id="d_B1_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 (0,5-2m) %</label><input type="number" id="d_B2_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">C (≤0,5m) %</label><input type="number" id="d_C_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">A h(m)</label><input type="number" id="d_A_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 (2-6m) h(m)</label><input type="number" id="d_B1_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 (0,5-2m) h(m)</label><input type="number" id="d_B2_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">C (≤0,5m) h(m)</label><input type="number" id="d_C_h_${id}" class="form-control auto-save" value="0"></div></div></div>`;
-    });
+        const cdrzewa = document.getElementById('container_drzewa');
+        cdrzewa.innerHTML = '';
+        getSorted(drzewa_list).forEach(d => {
+            const id = cleanId(d);
+            cdrzewa.innerHTML += `<div class="tree-box"><strong class="text-success fs-5">${d}</strong><div class="row g-2 mt-1"><div class="col-3"><label class="form-label text-muted small">A %</label><input type="number" id="d_A_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 (2-6m) %</label><input type="number" id="d_B1_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 (0,5-2m) %</label><input type="number" id="d_B2_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">C (≤0,5m) %</label><input type="number" id="d_C_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">A h(m)</label><input type="number" id="d_A_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 (2-6m) h(m)</label><input type="number" id="d_B1_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 (0,5-2m) h(m)</label><input type="number" id="d_B2_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">C (≤0,5m) h(m)</label><input type="number" id="d_C_h_${id}" class="form-control auto-save" value="0"></div></div></div>`;
+        });
+    }
 
-    // --- ZAPIS I OCHRONA ---
+    // Wygeneruj pola OD RAZU przed wczytaniem danych
+    generateFormFields();
+    document.getElementById('data').valueAsDate = new Date();
+
+    // --- LOGIKA CACHE ---
     function saveToLocalStorage() {
         const data = {};
         document.querySelectorAll('.auto-save').forEach(el => {
@@ -253,17 +263,21 @@
     function loadFromLocalStorage() {
         const saved = localStorage.getItem('bpn_form_cache');
         if (saved) {
-            const data = JSON.parse(saved);
-            Object.keys(data).forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    if (el.type === 'checkbox') {
-                        el.checked = data[id];
-                    } else {
-                        el.value = data[id];
+            try {
+                const data = JSON.parse(saved);
+                Object.keys(data).forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        if (el.type === 'checkbox') {
+                            el.checked = Boolean(data[id]);
+                        } else {
+                            el.value = data[id];
+                        }
                     }
-                }
-            });
+                });
+            } catch(e) {
+                console.error("Błąd parsowania cache:", e);
+            }
         }
     }
 
@@ -279,29 +293,38 @@
         e.returnValue = '';
     });
 
-    // BEZPOŚREDNI RESET FORMULARZA W REAL-TIME (BEZ REFRESHA)
+    // ABSOLUTNE BEZPOŚREDNIE CZYSZCZENIE KAŻDEGO POLE PO KOLEI
     function clearForm() {
         if (confirm("Czy na pewno chcesz wyczyścić cały formularz? Wszystkie wprowadzone dane zostaną usunięte.")) {
-            // 1. Usunięcie z cache przeglądarki
+            // 1. Usunięcie z cache
             localStorage.removeItem('bpn_form_cache');
             
-            // 2. Natywne zresetowanie struktury formularza
+            // 2. Czyszczenie domyślne HTML
             document.getElementById('bpn-main-form').reset();
 
-            // 3. Wymuszone wyczyszczenie komentarzy i tekstu
-            document.querySelectorAll('textarea, input[type="text"]').forEach(el => el.value = '');
+            // 3. Ręczne wyzerowanie absolutnie każdego elementu formularza
+            const allInputs = document.querySelectorAll('#bpn-main-form input, #bpn-main-form select, #bpn-main-form textarea');
+            allInputs.forEach(el => {
+                if (el.type === 'checkbox') {
+                    el.checked = false;
+                } else if (el.type === 'number') {
+                    el.value = '0';
+                } else if (el.tagName === 'SELECT') {
+                    el.selectedIndex = 0;
+                } else {
+                    el.value = '';
+                }
+            });
 
-            // 4. Wymuszone zerowanie pól numerycznych
-            document.querySelectorAll('input[type="number"]').forEach(el => el.value = 0);
-
-            // 5. Ustawienie daty dzisiejszej
+            // 4. Ponowne przywrócenie dzisiejszej daty
             document.getElementById('data').valueAsDate = new Date();
 
-            // 6. Zapisanie pustego stanu w cache
+            // 5. Zapisanie czystego stanu
             saveToLocalStorage();
         }
     }
 
+    // Wczytaj dane zapisane po wygenerowaniu struktur
     loadFromLocalStorage();
 
     function downloadCSV() {
