@@ -279,12 +279,31 @@
         e.returnValue = ''; // Wymagane przez większość przeglądarek do wyświetlenia okna dialogowego
     });
 
-    function clearForm() {
-        if (confirm("Czy na pewno chcesz wyczyścić cały formularz? Wszystkie wprowadzone dane zostaną usunięte.")) {
-            localStorage.removeItem('bpn_form_cache');
-            location.reload();
-        }
+function clearForm() {
+    if (confirm("Czy na pewno chcesz wyczyścić cały formularz? Wszystkie wprowadzone dane zostaną usunięte.")) {
+        // 1. Czyszczenie pamięci podręcznej
+        localStorage.removeItem('bpn_form_cache');
+        
+        // 2. Resetowanie wszystkich pól tekstowych, liczbowych i selectów
+        document.querySelectorAll('.auto-save').forEach(el => {
+            if (el.type === 'checkbox') {
+                el.checked = false;
+            } else if (el.type === 'number') {
+                el.value = 0;
+            } else if (el.tagName === 'SELECT') {
+                el.selectedIndex = 0;
+            } else {
+                el.value = '';
+            }
+        });
+
+        // 3. Przywrócenie domyślnej daty (dzisiejszej)
+        document.getElementById('data').valueAsDate = new Date();
+
+        // 4. Nadpisanie pustego stanu w localStorage, żeby po odświeżeniu nic nie wróciło
+        saveToLocalStorage();
     }
+}
 
     // Wczytaj dane z cache przy starcie
     loadFromLocalStorage();
