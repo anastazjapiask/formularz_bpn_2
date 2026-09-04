@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formularz Spisu Terenowego BPN</title>
     
-    <!-- Linki wymagane dla PWA i pracy offline -->
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#78c2ad">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/620/620851.png">
@@ -33,13 +32,13 @@
         <div class="card-header">1. Metadane Spisu</div>
         <div class="card-body">
             <div class="row g-2">
-                <div class="col-md-3"><label class="form-label">Data:</label><input type="date" id="data" class="form-control"></div>
-                <div class="col-md-3"><label class="form-label">Wykonawca:</label><input type="text" id="wykonawca" class="form-control"></div>
-                <div class="col-md-3"><label class="form-label">Nr spisu:</label><input type="text" id="nr_spisu" class="form-control"></div>
-                <div class="col-md-3"><label class="form-label">Nr waypoint:</label><input type="text" id="nr_waypoint" class="form-control"></div>
-                <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input" type="checkbox" id="foto_poglad"><label class="form-check-label">Foto poglądowe (TAK)</label></div></div>
-                <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input" type="checkbox" id="foto_runi"><label class="form-check-label">Foto runi (TAK)</label></div></div>
-                <div class="col-12"><label class="form-label">Komentarz / Uwagi:</label><textarea id="uwagi_sec_1" class="form-control" rows="2"></textarea></div>
+                <div class="col-md-3"><label class="form-label">Data:</label><input type="date" id="data" class="form-control auto-save"></div>
+                <div class="col-md-3"><label class="form-label">Wykonawca:</label><input type="text" id="wykonawca" class="form-control auto-save"></div>
+                <div class="col-md-3"><label class="form-label">Nr spisu:</label><input type="text" id="nr_spisu" class="form-control auto-save"></div>
+                <div class="col-md-3"><label class="form-label">Nr waypoint:</label><input type="text" id="nr_waypoint" class="form-control auto-save"></div>
+                <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input auto-save" type="checkbox" id="foto_poglad"><label class="form-check-label">Foto poglądowe (TAK)</label></div></div>
+                <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input auto-save" type="checkbox" id="foto_runi"><label class="form-check-label">Foto runi (TAK)</label></div></div>
+                <div class="col-12"><label class="form-label">Komentarz / Uwagi:</label><textarea id="uwagi_sec_1" class="form-control auto-save" rows="2"></textarea></div>
             </div>
         </div>
     </div>
@@ -49,24 +48,25 @@
         <div class="card-header">2. Parametry siedliska</div>
         <div class="card-body">
             <div class="row g-2">
-                <div class="col-6 col-md-3"><label class="form-label">Pokrycie D (%)</label><input type="number" id="pokrycie_d" class="form-control" value="0"></div>
-                <div class="col-6 col-md-3"><label class="form-label">Pokrycie C (%)</label><input type="number" id="pokrycie_c" class="form-control" value="0"></div>
-                <div class="col-6 col-md-3"><label class="form-label">Mchy inne (%)</label><input type="number" id="mchy_inne" class="form-control" value="0"></div>
-                <div class="col-6 col-md-3"><label class="form-label">Torfowce (%)</label><input type="number" id="torfowce" class="form-control" value="0"></div>
-                <div class="col-6"><label class="form-label">Wojlok (%)</label><input type="number" id="wojlok" class="form-control" value="0"></div>
-                <div class="col-6">
+                <div class="col-6 col-md-3"><label class="form-label">Pokrycie D (%)</label><input type="number" id="pokrycie_d" class="form-control auto-save" value="0"></div>
+                <div class="col-6 col-md-3"><label class="form-label">Pokrycie C (z krzewami) (%)</label><input type="number" id="pokrycie_c_z_krzewami" class="form-control auto-save" value="0"></div>
+                <div class="col-6 col-md-3"><label class="form-label">Pokrycie C (bez krzewów) (%)</label><input type="number" id="pokrycie_c_bez_krzewow" class="form-control auto-save" value="0"></div>
+                <div class="col-6 col-md-3"><label class="form-label">Mchy inne (%)</label><input type="number" id="mchy_inne" class="form-control auto-save" value="0"></div>
+                <div class="col-6 col-md-3"><label class="form-label">Torfowce (%)</label><input type="number" id="torfowce" class="form-control auto-save" value="0"></div>
+                <div class="col-6 col-md-3"><label class="form-label">Wojlok (%)</label><input type="number" id="wojlok" class="form-control auto-save" value="0"></div>
+                <div class="col-md-6">
                     <label class="form-label">Uwilgotnienie:</label>
-                    <select id="uwilgotnienie" class="form-select">
+                    <select id="uwilgotnienie" class="form-select auto-save">
                         <option value="A">A. Podłoże wysuszone</option>
                         <option value="B">B. Wyczuwalna wilgoć</option>
                         <option value="C">C. Podłoże mokre</option>
                         <option value="D">D. Kałuże / zalanie</option>
                     </select>
                 </div>
-                <div class="col-md-4"><label class="form-label">Struktura kępk. (%)</label><input type="number" id="kepkowa_pct" class="form-control" value="0"></div>
-                <div class="col-md-4"><label class="form-label">Udział kęp (%)</label><input type="number" id="udzial_kep_pct" class="form-control" value="0"></div>
-                <div class="col-md-4"><label class="form-label">Śr. wys. trzon. (cm)</label><input type="number" id="trzony_wys" class="form-control" value="0"></div>
-                <div class="col-12"><label class="form-label">Uwagi:</label><textarea id="uwagi_sec_2" class="form-control" rows="2"></textarea></div>
+                <div class="col-md-4"><label class="form-label">Struktura kępk. (%)</label><input type="number" id="kepkowa_pct" class="form-control auto-save" value="0"></div>
+                <div class="col-md-4"><label class="form-label">Udział kęp (%)</label><input type="number" id="udzial_kep_pct" class="form-control auto-save" value="0"></div>
+                <div class="col-md-4"><label class="form-label">Śr. wys. trzon. (cm)</label><input type="number" id="trzony_wys" class="form-control auto-save" value="0"></div>
+                <div class="col-12"><label class="form-label">Uwagi:</label><textarea id="uwagi_sec_2" class="form-control auto-save" rows="2"></textarea></div>
             </div>
         </div>
     </div>
@@ -77,11 +77,11 @@
         <div class="card-body">
             <h5>Gatunki z listy G - charakterystyczne dla torfowisk</h5>
             <div class="row g-2" id="container_g"></div>
-            <textarea id="uwagi_sec_3_g" class="form-control mt-2" rows="2" placeholder="Uwagi do listy G"></textarea>
+            <textarea id="uwagi_sec_3_g" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi do listy G"></textarea>
             <hr>
             <h5>Inne gatunki wskaźnikowe</h5>
             <div class="row g-2" id="container_ginne"></div>
-            <textarea id="uwagi_sec_3" class="form-control mt-2" rows="2" placeholder="Uwagi pozostałe"></textarea>
+            <textarea id="uwagi_sec_3" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi pozostałe"></textarea>
         </div>
     </div>
 
@@ -91,11 +91,11 @@
         <div class="card-body">
             <h5>Gatunki dominujące</h5>
             <div class="row g-2" id="container_dom"></div>
-            <textarea id="uwagi_sec_4_dom" class="form-control mt-2" rows="2" placeholder="Uwagi do dominujących"></textarea>
+            <textarea id="uwagi_sec_4_dom" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi do dominujących"></textarea>
             <hr>
             <h5>Gatunki nitrofilne, świadczące o przesuszeniu, ziołoroślowe i inwazyjne</h5>
             <div class="row g-2" id="container_znt"></div>
-            <textarea id="uwagi_sec_4" class="form-control mt-2" rows="2" placeholder="Uwagi towarzyszące"></textarea>
+            <textarea id="uwagi_sec_4" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi towarzyszące"></textarea>
         </div>
     </div>
 
@@ -104,7 +104,7 @@
         <div class="card-header">5. Mchy (obecność)</div>
         <div class="card-body">
             <div class="row g-2" id="container_mech"></div>
-            <textarea id="uwagi_sec_5" class="form-control mt-2" rows="2" placeholder="Uwagi mchy"></textarea>
+            <textarea id="uwagi_sec_5" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi mchy"></textarea>
         </div>
     </div>
 
@@ -113,7 +113,7 @@
         <div class="card-header">6. Krzewy i drzewa</div>
         <div class="card-body">
             <div id="container_drzewa"></div>
-            <textarea id="uwagi_sec_7" class="form-control mt-2" rows="2" placeholder="Uwagi drzewa/krzewy"></textarea>
+            <textarea id="uwagi_sec_7" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi drzewa/krzewy"></textarea>
         </div>
     </div>
 
@@ -124,7 +124,7 @@
             <div class="row g-2">
                 <div class="col-md-6">
                     <label class="form-label">Odkrzaczanie:</label>
-                    <select id="odkrzaczanie" class="form-select">
+                    <select id="odkrzaczanie" class="form-select auto-save">
                         <option>NIE</option>
                         <option>TAK - Inicjalne</option>
                         <option>TAK - Usuwanie odrośli</option>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Koszenie:</label>
-                    <select id="koszenie" class="form-select">
+                    <select id="koszenie" class="form-select auto-save">
                         <option>NIE</option>
                         <option>Ręczne</option>
                         <option>Mechaniczne</option>
@@ -141,13 +141,14 @@
                 </div>
                 <div class="col-12 mt-2">
                     <label class="form-label">Uwagi końcowe:</label>
-                    <textarea id="komentarze" class="form-control" rows="4"></textarea>
+                    <textarea id="komentarze" class="form-control auto-save" rows="4"></textarea>
                 </div>
             </div>
         </div>
     </div>
 
-    <button onclick="downloadCSV()" class="btn btn-success btn-lg w-100 mt-4 p-3 fw-bold">Zapisz i Pobierz CSV</button>
+    <button onclick="downloadCSV()" class="btn btn-success btn-lg w-100 mt-4 p-3 fw-bold">Zapisz i pobierz CSV :))</button>
+    <button onclick="clearForm()" class="btn btn-outline-danger w-100 mt-2 p-2">Zresetuj / Wyczyść formularz</button>
 </div>
 
 <script>
@@ -205,38 +206,111 @@
     // Generowanie HTML
     const cg = document.getElementById('container_g');
     getSorted(g_list).forEach(g => { 
-        cg.innerHTML += `<div class="col-md-4"><label class="form-label">${g}</label><input type="number" id="g_${cleanId(g)}" class="form-control" value="0"></div>`; 
+        cg.innerHTML += `<div class="col-md-4"><label class="form-label">${g}</label><input type="number" id="g_${cleanId(g)}" class="form-control auto-save" value="0"></div>`; 
     });
 
     const cginne = document.getElementById('container_ginne');
     getSorted(ginne_list).forEach(g => {
-        cginne.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="ginne_pct_${cleanId(g)}" class="form-control form-control-sm" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input" type="checkbox" id="ginne_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
+        cginne.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="ginne_pct_${cleanId(g)}" class="form-control form-control-sm auto-save" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input auto-save" type="checkbox" id="ginne_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
     });
 
     const cdom = document.getElementById('container_dom');
     getSorted(dom_list).forEach(g => {
-        cdom.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="dom_pct_${cleanId(g)}" class="form-control form-control-sm" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input" type="checkbox" id="dom_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
+        cdom.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="dom_pct_${cleanId(g)}" class="form-control form-control-sm auto-save" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input auto-save" type="checkbox" id="dom_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
     });
 
     const cznt = document.getElementById('container_znt');
     getSorted(znt_list).forEach(g => {
-        cznt.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="znt_pct_${cleanId(g)}" class="form-control form-control-sm" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input" type="checkbox" id="znt_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
+        cznt.innerHTML += `<div class="col-md-4"><div class="item-box"><strong>${g}</strong><div class="row g-1 mt-1 align-items-center"><div class="col-7"><input type="number" id="znt_pct_${cleanId(g)}" class="form-control form-control-sm auto-save" value="0"></div><div class="col-5"><div class="form-check ms-2"><input class="form-check-input auto-save" type="checkbox" id="znt_exp_${cleanId(g)}"><label class="form-check-label">E</label></div></div></div></div></div>`;
     });
 
     const cmech = document.getElementById('container_mech');
     getSorted(mech_list).forEach(m => { 
-        cmech.innerHTML += `<div class="col-md-4"><div class="item-box"><div class="form-check"><input class="form-check-input" type="checkbox" id="mech_${cleanId(m)}"><label class="form-check-label fw-bold" for="mech_${cleanId(m)}">${m}</label></div></div></div>`; 
+        cmech.innerHTML += `<div class="col-md-4"><div class="item-box"><div class="form-check"><input class="form-check-input auto-save" type="checkbox" id="mech_${cleanId(m)}"><label class="form-check-label fw-bold" for="mech_${cleanId(m)}">${m}</label></div></div></div>`; 
     });
 
     const cdrzewa = document.getElementById('container_drzewa');
     getSorted(drzewa_list).forEach(d => {
         const id = cleanId(d);
-        cdrzewa.innerHTML += `<div class="tree-box"><strong class="text-success fs-5">${d}</strong><div class="row g-2 mt-1"><div class="col-3"><label class="form-label text-muted small">A %</label><input type="number" id="d_A_pct_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 %</label><input type="number" id="d_B1_pct_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 %</label><input type="number" id="d_B2_pct_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">C %</label><input type="number" id="d_C_pct_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">A h(m)</label><input type="number" id="d_A_h_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 h(m)</label><input type="number" id="d_B1_h_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 h(m)</label><input type="number" id="d_B2_h_${id}" class="form-control" value="0"></div><div class="col-3"><label class="form-label text-muted small">C h(m)</label><input type="number" id="d_C_h_${id}" class="form-control" value="0"></div></div></div>`;
+        cdrzewa.innerHTML += `<div class="tree-box"><strong class="text-success fs-5">${d}</strong><div class="row g-2 mt-1"><div class="col-3"><label class="form-label text-muted small">A %</label><input type="number" id="d_A_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 (2-6m) %</label><input type="number" id="d_B1_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 (0,5-2m) %</label><input type="number" id="d_B2_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">C (≤0,5m) %</label><input type="number" id="d_C_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">A h(m)</label><input type="number" id="d_A_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 (2-6m) h(m)</label><input type="number" id="d_B1_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 (0,5-2m) h(m)</label><input type="number" id="d_B2_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">C (≤0,5m) h(m)</label><input type="number" id="d_C_h_${id}" class="form-control auto-save" value="0"></div></div></div>`;
     });
 
+    // --- MECHANIZM AUTOMATYCZNEGO ZAPISU I OCHRONY PRZED ZAMKNIĘCIEM ---
+    function saveToLocalStorage() {
+        const data = {};
+        document.querySelectorAll('.auto-save').forEach(el => {
+            if (el.type === 'checkbox') {
+                data[el.id] = el.checked;
+            } else {
+                data[el.id] = el.value;
+            }
+        });
+        localStorage.setItem('bpn_form_cache', JSON.stringify(data));
+    }
+
+    function loadFromLocalStorage() {
+        const saved = localStorage.getItem('bpn_form_cache');
+        if (saved) {
+            const data = JSON.parse(saved);
+            Object.keys(data).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (el.type === 'checkbox') {
+                        el.checked = data[id];
+                    } else {
+                        el.value = data[id];
+                    }
+                }
+            });
+        }
+    }
+
+    // Podpięcie zdarzeń zapisujących
+    document.addEventListener('input', (e) => {
+        if (e.target.classList.contains('auto-save')) saveToLocalStorage();
+    });
+    document.addEventListener('change', (e) => {
+        if (e.target.classList.contains('auto-save')) saveToLocalStorage();
+    });
+
+    // Ostrzeżenie przed wyjściem/odświeżeniem
+    window.addEventListener('beforeunload', (e) => {
+        e.preventDefault();
+        e.returnValue = ''; // Wymagane przez większość przeglądarek do wyświetlenia okna dialogowego
+    });
+
+    function clearForm() {
+        if (confirm("Czy na pewno chcesz wyczyścić cały formularz? Wszystkie wprowadzone dane zostaną usunięte.")) {
+            localStorage.removeItem('bpn_form_cache');
+            location.reload();
+        }
+    }
+
+    // Wczytaj dane z cache przy starcie
+    loadFromLocalStorage();
+
     function downloadCSV() {
-        let headers = ["Data","Wykonawca","Nr_Spisu","Waypoint","Foto_Pogladowe","Foto_Runi","Komentarz_Sec_1","Pokrycie_D_pct","Pokrycie_C_pct","Mchy_Inne_pct","Torfowce_pct","Wojlok_pct","Struktura_Kepkowa_pct","Udzial_Kep_pct","Srednia_Wys_Trzonow_cm","Uwilgotnienie","Komentarz_Sec_2"];
-        let row = [`"${document.getElementById('data').value}"`,`"${document.getElementById('wykonawca').value}"`,`"${document.getElementById('nr_spisu').value}"`,`"${document.getElementById('nr_waypoint').value}"`,`"${document.getElementById('foto_poglad').checked ? 'TAK' : 'NIE'}"`,`"${document.getElementById('foto_runi').checked ? 'TAK' : 'NIE'}"`,`"${document.getElementById('uwagi_sec_1').value}"`,document.getElementById('pokrycie_d').value,document.getElementById('pokrycie_c').value,document.getElementById('mchy_inne').value,document.getElementById('torfowce').value,document.getElementById('wojlok').value,document.getElementById('kepkowa_pct').value,document.getElementById('udzial_kep_pct').value,document.getElementById('trzony_wys').value,`"${document.getElementById('uwilgotnienie').value}"`,`"${document.getElementById('uwagi_sec_2').value}"`];
+        let headers = ["Data","Wykonawca","Nr_Spisu","Waypoint","Foto_Pogladowe","Foto_Runi","Komentarz_Sec_1","Pokrycie_D_pct","Pokrycie_C_z_krzewami_pct","Pokrycie_C_bez_krzewow_pct","Mchy_Inne_pct","Torfowce_pct","Wojlok_pct","Struktura_Kepkowa_pct","Udzial_Kep_pct","Srednia_Wys_Trzonow_cm","Uwilgotnienie","Komentarz_Sec_2"];
+        let row = [
+            `"${document.getElementById('data').value}"`,
+            `"${document.getElementById('wykonawca').value}"`,
+            `"${document.getElementById('nr_spisu').value}"`,
+            `"${document.getElementById('nr_waypoint').value}"`,
+            `"${document.getElementById('foto_poglad').checked ? 'TAK' : 'NIE'}"`,
+            `"${document.getElementById('foto_runi').checked ? 'TAK' : 'NIE'}"`,
+            `"${document.getElementById('uwagi_sec_1').value}"`,
+            document.getElementById('pokrycie_d').value,
+            document.getElementById('pokrycie_c_z_krzewami').value,
+            document.getElementById('pokrycie_c_bez_krzewow').value,
+            document.getElementById('mchy_inne').value,
+            document.getElementById('torfowce').value,
+            document.getElementById('wojlok').value,
+            document.getElementById('kepkowa_pct').value,
+            document.getElementById('udzial_kep_pct').value,
+            document.getElementById('trzony_wys').value,
+            `"${document.getElementById('uwilgotnienie').value}"`,
+            `"${document.getElementById('uwagi_sec_2').value}"`
+        ];
 
         getSorted(g_list).forEach(g => { headers.push(`"${g} %"`); row.push(document.getElementById(`g_${cleanId(g)}`).value); });
         headers.push('"Komentarz_Gatunki_G"'); row.push(`"${document.getElementById('uwagi_sec_3_g').value}"`);
@@ -267,8 +341,13 @@
 
         getSorted(drzewa_list).forEach(d => {
             const id = cleanId(d);
-            headers.push(`"${d} A %"`,`"${d} A h(m)"`,`"${d} B1 %"`,`"${d} B1 h(m)"`,`"${d} B2 %"`,`"${d} B2 h(m)"`,`"${d} C %"`,`"${d} C h(m)"`);
-            row.push(document.getElementById(`d_A_pct_${id}`).value, document.getElementById(`d_A_h_${id}`).value, document.getElementById(`d_B1_pct_${id}`).value, document.getElementById(`d_B1_h_${id}`).value, document.getElementById(`d_B2_pct_${id}`).value, document.getElementById(`d_B2_h_${id}`).value, document.getElementById(`d_C_pct_${id}`).value, document.getElementById(`d_C_h_${id}`).value);
+            headers.push(`"${d} A %"`,`"${d} A h(m)"`,`"${d} B1(2-6m) %"`,`"${d} B1(2-6m) h(m)"`,`"${d} B2(0.5-2m) %"`,`"${d} B2(0.5-2m) h(m)"`,`"${d} C(<=0.5m) %"`,`"${d} C(<=0.5m) h(m)"`);
+            row.push(
+                document.getElementById(`d_A_pct_${id}`).value, document.getElementById(`d_A_h_${id}`).value, 
+                document.getElementById(`d_B1_pct_${id}`).value, document.getElementById(`d_B1_h_${id}`).value, 
+                document.getElementById(`d_B2_pct_${id}`).value, document.getElementById(`d_B2_h_${id}`).value, 
+                document.getElementById(`d_C_pct_${id}`).value, document.getElementById(`d_C_h_${id}`).value
+            );
         });
         headers.push('"Komentarz_Sec_7"'); row.push(`"${document.getElementById('uwagi_sec_7').value}"`);
 
@@ -285,16 +364,15 @@
         document.body.removeChild(link);
     }
 
-    // Rejestracja Service Workera
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./sw.js')
                 .then((reg) => {
-                    console.log('SW zarejestrowany pomyślnie!', reg);
-                    document.getElementById('offline-badge').innerText = 'Gotowy do pracy offline!';
+                    console.log('SW zarejestrowany!', reg);
+                    document.getElementById('offline-badge').innerText = 'Gotowy do pracy offline :)))!';
                 })
                 .catch(err => {
-                    console.error('Błąd rejestracji SW:', err);
+                    console.error('Błąd SW:', err);
                     document.getElementById('offline-badge').innerText = 'Błąd offline (HTTPS?)';
                     document.getElementById('offline-badge').style.background = '#dc3545';
                 });
