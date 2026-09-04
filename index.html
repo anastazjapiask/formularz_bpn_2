@@ -36,8 +36,8 @@
                 <div class="col-md-3"><label class="form-label">Wykonawca:</label><input type="text" id="wykonawca" class="form-control auto-save"></div>
                 <div class="col-md-3"><label class="form-label">Nr spisu:</label><input type="text" id="nr_spisu" class="form-control auto-save"></div>
                 <div class="col-md-3"><label class="form-label">Nr waypoint:</label><input type="text" id="nr_waypoint" class="form-control auto-save"></div>
-                <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input auto-save" type="checkbox" id="foto_poglad"><label class="form-check-label">Foto poglądowe (TAK)</label></div></div>
-                <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input auto-save" type="checkbox" id="foto_runi"><label class="form-check-label">Foto runi (TAK)</label></div></div>
+                <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input auto-save" type="checkbox" id="foto_poglad"><label class="form-check-label" for="foto_poglad">Foto poglądowe (TAK)</label></div></div>
+                <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input auto-save" type="checkbox" id="foto_runi"><label class="form-check-label" for="foto_runi">Foto runi (TAK)</label></div></div>
                 <div class="col-12"><label class="form-label">Komentarz / Uwagi:</label><textarea id="uwagi_sec_1" class="form-control auto-save" rows="2"></textarea></div>
             </div>
         </div>
@@ -147,7 +147,7 @@
         </div>
     </div>
 
-    <button onclick="downloadCSV()" class="btn btn-success btn-lg w-100 mt-4 p-3 fw-bold">Zapisz i pobierz CSV :))</button>
+    <button onclick="downloadCSV()" class="btn btn-success btn-lg w-100 mt-4 p-3 fw-bold">Zapisz i Pobierz CSV</button>
     <button onclick="clearForm()" class="btn btn-outline-danger w-100 mt-2 p-2">Zresetuj / Wyczyść formularz</button>
 </div>
 
@@ -235,7 +235,7 @@
         cdrzewa.innerHTML += `<div class="tree-box"><strong class="text-success fs-5">${d}</strong><div class="row g-2 mt-1"><div class="col-3"><label class="form-label text-muted small">A %</label><input type="number" id="d_A_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 (2-6m) %</label><input type="number" id="d_B1_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 (0,5-2m) %</label><input type="number" id="d_B2_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">C (≤0,5m) %</label><input type="number" id="d_C_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">A h(m)</label><input type="number" id="d_A_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 (2-6m) h(m)</label><input type="number" id="d_B1_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 (0,5-2m) h(m)</label><input type="number" id="d_B2_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">C (≤0,5m) h(m)</label><input type="number" id="d_C_h_${id}" class="form-control auto-save" value="0"></div></div></div>`;
     });
 
-    // --- MECHANIZM AUTOMATYCZNEGO ZAPISU I OCHRONY PRZED ZAMKNIĘCIEM ---
+    // --- AUTOMATYCZNY ZAPIS I OCHRONA ---
     function saveToLocalStorage() {
         const data = {};
         document.querySelectorAll('.auto-save').forEach(el => {
@@ -265,7 +265,6 @@
         }
     }
 
-    // Podpięcie zdarzeń zapisujących
     document.addEventListener('input', (e) => {
         if (e.target.classList.contains('auto-save')) saveToLocalStorage();
     });
@@ -273,39 +272,38 @@
         if (e.target.classList.contains('auto-save')) saveToLocalStorage();
     });
 
-    // Ostrzeżenie przed wyjściem/odświeżeniem
     window.addEventListener('beforeunload', (e) => {
         e.preventDefault();
-        e.returnValue = ''; // Wymagane przez większość przeglądarek do wyświetlenia okna dialogowego
+        e.returnValue = '';
     });
 
-function clearForm() {
-    if (confirm("Czy na pewno chcesz wyczyścić cały formularz? Wszystkie wprowadzone dane zostaną usunięte.")) {
-        // 1. Czyszczenie pamięci podręcznej
-        localStorage.removeItem('bpn_form_cache');
-        
-        // 2. Resetowanie wszystkich pól tekstowych, liczbowych i selectów
-        document.querySelectorAll('.auto-save').forEach(el => {
-            if (el.type === 'checkbox') {
-                el.checked = false;
-            } else if (el.type === 'number') {
-                el.value = 0;
-            } else if (el.tagName === 'SELECT') {
-                el.selectedIndex = 0;
-            } else {
-                el.value = '';
-            }
-        });
+    // KOMPLETNA FUNKCJA CZYSZCZENIA DANYCH
+    function clearForm() {
+        if (confirm("Czy na pewno chcesz wyczyścić cały formularz? Wszystkie wprowadzone dane zostaną usunięte.")) {
+            // 1. Usunięcie z cache
+            localStorage.removeItem('bpn_form_cache');
+            
+            // 2. Reset każdego pola z osobna do wartości domyślnych
+            document.querySelectorAll('.auto-save').forEach(el => {
+                if (el.type === 'checkbox') {
+                    el.checked = false;
+                } else if (el.type === 'number') {
+                    el.value = 0;
+                } else if (el.tagName === 'SELECT') {
+                    el.selectedIndex = 0; // Pierwsza domyślna opcja (np. "NIE")
+                } else {
+                    el.value = '';
+                }
+            });
 
-        // 3. Przywrócenie domyślnej daty (dzisiejszej)
-        document.getElementById('data').valueAsDate = new Date();
+            // 3. Przywrócenie daty dzisiejszej
+            document.getElementById('data').valueAsDate = new Date();
 
-        // 4. Nadpisanie pustego stanu w localStorage, żeby po odświeżeniu nic nie wróciło
-        saveToLocalStorage();
+            // 4. Nadpisanie wyczyszczonego stanu w pamieci
+            saveToLocalStorage();
+        }
     }
-}
 
-    // Wczytaj dane z cache przy starcie
     loadFromLocalStorage();
 
     function downloadCSV() {
@@ -388,7 +386,7 @@ function clearForm() {
             navigator.serviceWorker.register('./sw.js')
                 .then((reg) => {
                     console.log('SW zarejestrowany!', reg);
-                    document.getElementById('offline-badge').innerText = 'Gotowy do pracy offline :)))!';
+                    document.getElementById('offline-badge').innerText = 'Gotowy do pracy offline!';
                 })
                 .catch(err => {
                     console.error('Błąd SW:', err);
