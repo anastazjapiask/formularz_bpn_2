@@ -27,125 +27,127 @@
         <span class="status-offline" id="offline-badge">Status: Weryfikacja...</span>
     </div>
 
-    <!-- 1. Metadane Spisu -->
-    <div class="card">
-        <div class="card-header">1. Metadane Spisu</div>
-        <div class="card-body">
-            <div class="row g-2">
-                <div class="col-md-3"><label class="form-label">Data:</label><input type="date" id="data" class="form-control auto-save"></div>
-                <div class="col-md-3"><label class="form-label">Wykonawca:</label><input type="text" id="wykonawca" class="form-control auto-save"></div>
-                <div class="col-md-3"><label class="form-label">Nr spisu:</label><input type="text" id="nr_spisu" class="form-control auto-save"></div>
-                <div class="col-md-3"><label class="form-label">Nr waypoint:</label><input type="text" id="nr_waypoint" class="form-control auto-save"></div>
-                <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input auto-save" type="checkbox" id="foto_poglad"><label class="form-check-label" for="foto_poglad">Foto poglądowe (TAK)</label></div></div>
-                <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input auto-save" type="checkbox" id="foto_runi"><label class="form-check-label" for="foto_runi">Foto runi (TAK)</label></div></div>
-                <div class="col-12"><label class="form-label">Komentarz / Uwagi:</label><textarea id="uwagi_sec_1" class="form-control auto-save" rows="2"></textarea></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 2. Parametry siedliska -->
-    <div class="card">
-        <div class="card-header">2. Parametry siedliska</div>
-        <div class="card-body">
-            <div class="row g-2">
-                <div class="col-6 col-md-3"><label class="form-label">Pokrycie D (%)</label><input type="number" id="pokrycie_d" class="form-control auto-save" value="0"></div>
-                <div class="col-6 col-md-3"><label class="form-label">Pokrycie C (z krzewami) (%)</label><input type="number" id="pokrycie_c_z_krzewami" class="form-control auto-save" value="0"></div>
-                <div class="col-6 col-md-3"><label class="form-label">Pokrycie C (bez krzewów) (%)</label><input type="number" id="pokrycie_c_bez_krzewow" class="form-control auto-save" value="0"></div>
-                <div class="col-6 col-md-3"><label class="form-label">Mchy inne (%)</label><input type="number" id="mchy_inne" class="form-control auto-save" value="0"></div>
-                <div class="col-6 col-md-3"><label class="form-label">Torfowce (%)</label><input type="number" id="torfowce" class="form-control auto-save" value="0"></div>
-                <div class="col-6 col-md-3"><label class="form-label">Wojlok (%)</label><input type="number" id="wojlok" class="form-control auto-save" value="0"></div>
-                <div class="col-md-6">
-                    <label class="form-label">Uwilgotnienie:</label>
-                    <select id="uwilgotnienie" class="form-select auto-save">
-                        <option value="A">A. Podłoże wysuszone</option>
-                        <option value="B">B. Wyczuwalna wilgoć</option>
-                        <option value="C">C. Podłoże mokre</option>
-                        <option value="D">D. Kałuże / zalanie</option>
-                    </select>
-                </div>
-                <div class="col-md-4"><label class="form-label">Struktura kępk. (%)</label><input type="number" id="kepkowa_pct" class="form-control auto-save" value="0"></div>
-                <div class="col-md-4"><label class="form-label">Udział kęp (%)</label><input type="number" id="udzial_kep_pct" class="form-control auto-save" value="0"></div>
-                <div class="col-md-4"><label class="form-label">Śr. wys. trzon. (cm)</label><input type="number" id="trzony_wys" class="form-control auto-save" value="0"></div>
-                <div class="col-12"><label class="form-label">Uwagi:</label><textarea id="uwagi_sec_2" class="form-control auto-save" rows="2"></textarea></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. Gatunki G i Inne -->
-    <div class="card">
-        <div class="card-header">3. Gatunki wskaźnikowe [%]</div>
-        <div class="card-body">
-            <h5>Gatunki z listy G - charakterystyczne dla torfowisk</h5>
-            <div class="row g-2" id="container_g"></div>
-            <textarea id="uwagi_sec_3_g" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi do listy G"></textarea>
-            <hr>
-            <h5>Inne gatunki wskaźnikowe</h5>
-            <div class="row g-2" id="container_ginne"></div>
-            <textarea id="uwagi_sec_3" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi pozostałe"></textarea>
-        </div>
-    </div>
-
-    <!-- 4. Dominujące i Towarzyszące -->
-    <div class="card">
-        <div class="card-header">4. Gatunki dominujące i towarzyszące [%]</div>
-        <div class="card-body">
-            <h5>Gatunki dominujące</h5>
-            <div class="row g-2" id="container_dom"></div>
-            <textarea id="uwagi_sec_4_dom" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi do dominujących"></textarea>
-            <hr>
-            <h5>Gatunki nitrofilne, świadczące o przesuszeniu, ziołoroślowe i inwazyjne</h5>
-            <div class="row g-2" id="container_znt"></div>
-            <textarea id="uwagi_sec_4" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi towarzyszące"></textarea>
-        </div>
-    </div>
-
-    <!-- 5. Mchy (ODHACZANIE) -->
-    <div class="card">
-        <div class="card-header">5. Mchy (obecność)</div>
-        <div class="card-body">
-            <div class="row g-2" id="container_mech"></div>
-            <textarea id="uwagi_sec_5" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi mchy"></textarea>
-        </div>
-    </div>
-
-    <!-- 6. Drzewa -->
-    <div class="card">
-        <div class="card-header">6. Krzewy i drzewa</div>
-        <div class="card-body">
-            <div id="container_drzewa"></div>
-            <textarea id="uwagi_sec_7" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi drzewa/krzewy"></textarea>
-        </div>
-    </div>
-
-    <!-- 7. Zalecenia -->
-    <div class="card">
-        <div class="card-header">7. Zalecenia i uwagi</div>
-        <div class="card-body">
-            <div class="row g-2">
-                <div class="col-md-6">
-                    <label class="form-label">Odkrzaczanie:</label>
-                    <select id="odkrzaczanie" class="form-select auto-save">
-                        <option>NIE</option>
-                        <option>TAK - Inicjalne</option>
-                        <option>TAK - Usuwanie odrośli</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Koszenie:</label>
-                    <select id="koszenie" class="form-select auto-save">
-                        <option>NIE</option>
-                        <option>Ręczne</option>
-                        <option>Mechaniczne</option>
-                        <option>Mieszane</option>
-                    </select>
-                </div>
-                <div class="col-12 mt-2">
-                    <label class="form-label">Uwagi końcowe:</label>
-                    <textarea id="komentarze" class="form-control auto-save" rows="4"></textarea>
+    <form id="bpn-main-form" autocomplete="off">
+        <!-- 1. Metadane Spisu -->
+        <div class="card">
+            <div class="card-header">1. Metadane Spisu</div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-md-3"><label class="form-label">Data:</label><input type="date" id="data" class="form-control auto-save" autocomplete="off"></div>
+                    <div class="col-md-3"><label class="form-label">Wykonawca:</label><input type="text" id="wykonawca" class="form-control auto-save" autocomplete="off"></div>
+                    <div class="col-md-3"><label class="form-label">Nr spisu:</label><input type="text" id="nr_spisu" class="form-control auto-save" autocomplete="off"></div>
+                    <div class="col-md-3"><label class="form-label">Nr waypoint:</label><input type="text" id="nr_waypoint" class="form-control auto-save" autocomplete="off"></div>
+                    <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input auto-save" type="checkbox" id="foto_poglad"><label class="form-check-label" for="foto_poglad">Foto poglądowe (TAK)</label></div></div>
+                    <div class="col-md-6"><div class="form-check mt-3"><input class="form-check-input auto-save" type="checkbox" id="foto_runi"><label class="form-check-label" for="foto_runi">Foto runi (TAK)</label></div></div>
+                    <div class="col-12"><label class="form-label">Komentarz / Uwagi:</label><textarea id="uwagi_sec_1" class="form-control auto-save" rows="2" autocomplete="off"></textarea></div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- 2. Parametry siedliska -->
+        <div class="card">
+            <div class="card-header">2. Parametry siedliska</div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-6 col-md-3"><label class="form-label">Pokrycie D (%)</label><input type="number" id="pokrycie_d" class="form-control auto-save" value="0"></div>
+                    <div class="col-6 col-md-3"><label class="form-label">Pokrycie C (z krzewami) (%)</label><input type="number" id="pokrycie_c_z_krzewami" class="form-control auto-save" value="0"></div>
+                    <div class="col-6 col-md-3"><label class="form-label">Pokrycie C (bez krzewów) (%)</label><input type="number" id="pokrycie_c_bez_krzewow" class="form-control auto-save" value="0"></div>
+                    <div class="col-6 col-md-3"><label class="form-label">Mchy inne (%)</label><input type="number" id="mchy_inne" class="form-control auto-save" value="0"></div>
+                    <div class="col-6 col-md-3"><label class="form-label">Torfowce (%)</label><input type="number" id="torfowce" class="form-control auto-save" value="0"></div>
+                    <div class="col-6 col-md-3"><label class="form-label">Wojlok (%)</label><input type="number" id="wojlok" class="form-control auto-save" value="0"></div>
+                    <div class="col-md-6">
+                        <label class="form-label">Uwilgotnienie:</label>
+                        <select id="uwilgotnienie" class="form-select auto-save" autocomplete="off">
+                            <option value="A">A. Podłoże wysuszone</option>
+                            <option value="B">B. Wyczuwalna wilgoć</option>
+                            <option value="C">C. Podłoże mokre</option>
+                            <option value="D">D. Kałuże / zalanie</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4"><label class="form-label">Struktura kępk. (%)</label><input type="number" id="kepkowa_pct" class="form-control auto-save" value="0"></div>
+                    <div class="col-md-4"><label class="form-label">Udział kęp (%)</label><input type="number" id="udzial_kep_pct" class="form-control auto-save" value="0"></div>
+                    <div class="col-md-4"><label class="form-label">Śr. wys. trzon. (cm)</label><input type="number" id="trzony_wys" class="form-control auto-save" value="0"></div>
+                    <div class="col-12"><label class="form-label">Uwagi:</label><textarea id="uwagi_sec_2" class="form-control auto-save" rows="2" autocomplete="off"></textarea></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Gatunki G i Inne -->
+        <div class="card">
+            <div class="card-header">3. Gatunki wskaźnikowe [%]</div>
+            <div class="card-body">
+                <h5>Gatunki z listy G - charakterystyczne dla torfowisk</h5>
+                <div class="row g-2" id="container_g"></div>
+                <textarea id="uwagi_sec_3_g" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi do listy G" autocomplete="off"></textarea>
+                <hr>
+                <h5>Inne gatunki wskaźnikowe</h5>
+                <div class="row g-2" id="container_ginne"></div>
+                <textarea id="uwagi_sec_3" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi pozostałe" autocomplete="off"></textarea>
+            </div>
+        </div>
+
+        <!-- 4. Dominujące i Towarzyszące -->
+        <div class="card">
+            <div class="card-header">4. Gatunki dominujące i towarzyszące [%]</div>
+            <div class="card-body">
+                <h5>Gatunki dominujące</h5>
+                <div class="row g-2" id="container_dom"></div>
+                <textarea id="uwagi_sec_4_dom" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi do dominujących" autocomplete="off"></textarea>
+                <hr>
+                <h5>Gatunki nitrofilne, świadczące o przesuszeniu, ziołoroślowe i inwazyjne</h5>
+                <div class="row g-2" id="container_znt"></div>
+                <textarea id="uwagi_sec_4" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi towarzyszące" autocomplete="off"></textarea>
+            </div>
+        </div>
+
+        <!-- 5. Mchy (ODHACZANIE) -->
+        <div class="card">
+            <div class="card-header">5. Mchy (obecność)</div>
+            <div class="card-body">
+                <div class="row g-2" id="container_mech"></div>
+                <textarea id="uwagi_sec_5" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi mchy" autocomplete="off"></textarea>
+            </div>
+        </div>
+
+        <!-- 6. Drzewa -->
+        <div class="card">
+            <div class="card-header">6. Krzewy i drzewa</div>
+            <div class="card-body">
+                <div id="container_drzewa"></div>
+                <textarea id="uwagi_sec_7" class="form-control mt-2 auto-save" rows="2" placeholder="Uwagi drzewa/krzewy" autocomplete="off"></textarea>
+            </div>
+        </div>
+
+        <!-- 7. Zalecenia -->
+        <div class="card">
+            <div class="card-header">7. Zalecenia i uwagi</div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-md-6">
+                        <label class="form-label">Odkrzaczanie:</label>
+                        <select id="odkrzaczanie" class="form-select auto-save" autocomplete="off">
+                            <option value="NIE">NIE</option>
+                            <option value="TAK - Inicjalne">TAK - Inicjalne</option>
+                            <option value="TAK - Usuwanie odrośli">TAK - Usuwanie odrośli</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Koszenie:</label>
+                        <select id="koszenie" class="form-select auto-save" autocomplete="off">
+                            <option value="NIE">NIE</option>
+                            <option value="Ręczne">Ręczne</option>
+                            <option value="Mechaniczne">Mechaniczne</option>
+                            <option value="Mieszane">Mieszane</option>
+                        </select>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <label class="form-label">Uwagi końcowe:</label>
+                        <textarea id="komentarze" class="form-control auto-save" rows="4" autocomplete="off"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <button onclick="downloadCSV()" class="btn btn-success btn-lg w-100 mt-4 p-3 fw-bold">Zapisz i Pobierz CSV</button>
     <button onclick="clearForm()" class="btn btn-outline-danger w-100 mt-2 p-2">Zresetuj / Wyczyść formularz</button>
@@ -235,7 +237,7 @@
         cdrzewa.innerHTML += `<div class="tree-box"><strong class="text-success fs-5">${d}</strong><div class="row g-2 mt-1"><div class="col-3"><label class="form-label text-muted small">A %</label><input type="number" id="d_A_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 (2-6m) %</label><input type="number" id="d_B1_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 (0,5-2m) %</label><input type="number" id="d_B2_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">C (≤0,5m) %</label><input type="number" id="d_C_pct_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">A h(m)</label><input type="number" id="d_A_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B1 (2-6m) h(m)</label><input type="number" id="d_B1_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">B2 (0,5-2m) h(m)</label><input type="number" id="d_B2_h_${id}" class="form-control auto-save" value="0"></div><div class="col-3"><label class="form-label text-muted small">C (≤0,5m) h(m)</label><input type="number" id="d_C_h_${id}" class="form-control auto-save" value="0"></div></div></div>`;
     });
 
-    // --- AUTOMATYCZNY ZAPIS I OCHRONA ---
+    // --- ZAPIS I OCHRONA ---
     function saveToLocalStorage() {
         const data = {};
         document.querySelectorAll('.auto-save').forEach(el => {
@@ -277,30 +279,33 @@
         e.returnValue = '';
     });
 
-    // KOMPLETNA FUNKCJA CZYSZCZENIA DANYCH
+    // POPRAWIONA FUNKCJA PEŁNEGO RESETOWANIA
     function clearForm() {
         if (confirm("Czy na pewno chcesz wyczyścić cały formularz? Wszystkie wprowadzone dane zostaną usunięte.")) {
-            // 1. Usunięcie z cache
+            // 1. Usunięcie zapisanych danych z pamięci
             localStorage.removeItem('bpn_form_cache');
             
-            // 2. Reset każdego pola z osobna do wartości domyślnych
-            document.querySelectorAll('.auto-save').forEach(el => {
+            // 2. Natychmiastowe fizyczne zresetowanie wszystkich pól
+            document.querySelectorAll('input, select, textarea').forEach(el => {
                 if (el.type === 'checkbox') {
                     el.checked = false;
                 } else if (el.type === 'number') {
                     el.value = 0;
                 } else if (el.tagName === 'SELECT') {
-                    el.selectedIndex = 0; // Pierwsza domyślna opcja (np. "NIE")
+                    el.selectedIndex = 0;
                 } else {
                     el.value = '';
                 }
             });
 
-            // 3. Przywrócenie daty dzisiejszej
+            // 3. Ustawienie daty dzisiejszej
             document.getElementById('data').valueAsDate = new Date();
 
-            // 4. Nadpisanie wyczyszczonego stanu w pamieci
+            // 4. Nadpisanie pustego stanu w lokalnej pamięci
             saveToLocalStorage();
+            
+            // 5. Odświeżenie strony bez wymuszania zapamiętywania formularza przez przeglądarkę
+            window.location.reload();
         }
     }
 
