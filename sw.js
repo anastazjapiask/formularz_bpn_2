@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bpn-form-cache-v2'; // <--- Zmiana wersji na v2
+const CACHE_NAME = 'bpn-form-cache-v3'; // <--- Zmieniona wersja na v3
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -6,7 +6,7 @@ const ASSETS_TO_CACHE = [
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'
 ];
 
-// Instalacja SW
+// Instalacja Service Workera
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
@@ -16,14 +16,14 @@ self.addEventListener('install', (event) => {
     self.skipWaiting();
 });
 
-// Aktywacja i czyszczenie STARYCH wersji cache
+// Aktywacja i automatyczne usuwanie STARYCH wersji z pamięci przeglądarki
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((cache) => {
                     if (cache !== CACHE_NAME) {
-                        console.log('Usuwanie starego cache:', cache);
+                        console.log('Usuwanie starej wersji cache:', cache);
                         return caches.delete(cache);
                     }
                 })
