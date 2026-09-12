@@ -165,10 +165,11 @@
         "Triglochin palustre", "Vaccinium uliginosum", "Valeriana dioica"
     ];
 
+    // Cirsium palustre oraz Cirsium rivulare przeniesione TUTAJ:
     const ginne_list = [
         "Arrhenatherum elatius", "Calluna vulgaris", "Caltha palustris", "Carex cespitosa", 
-        "Carex nigra", "Carex panicea", "Cirsium oleraceum", "Cladonia spp", 
-        "Crepis paludosa", "Galium boreale", "Hypericum maculatum", "Juniperus communis", 
+        "Carex nigra", "Carex panicea", "Cirsium oleraceum", "Cirsium palustre", "Cirsium rivulare", 
+        "Cladonia spp", "Crepis paludosa", "Galium boreale", "Hypericum maculatum", "Juniperus communis", 
         "Lathyrus palustris", "Lathyrus pratensis", "Linum catharticum", "Lychnis flos-cuculi", 
         "Molinia caerulea", "Polygonum bistorta", "Rhinanthus spp.", "Scirpus sylvaticus", 
         "Selinum carvifolia", "Succisa pratensis", "Thalictrum flavum", "Thalictrum lucidum", 
@@ -181,8 +182,9 @@
         "Phragmites australis", "Poa pratensis", "Thelypteris palustris"
     ];
 
+    // Cirsium palustre oraz Cirsium rivulare usunięte ZTĄD:
     const znt_list = [
-        "Calamagrostis canescens", "Cirsium palustre", "Cirsium rivulare", "Eupatorium cannabinum", 
+        "Calamagrostis canescens", "Eupatorium cannabinum", 
         "Filipendula ulmaria", "Lysimachia vulgaris", "Molinia caerulea", "Phalaris arundinacea", 
         "Phragmites australis", "Typha latifolia", "Urtica dioica"
     ];
@@ -203,7 +205,6 @@
     function cleanId(str) { return str.toLowerCase().replace(/[^a-z0-9]/g, "_"); }
     function getSorted(arr) { return [...arr].sort((a, b) => a.localeCompare(b, 'pl', { sensitivity: 'base' })); }
 
-    // 1. GENEROWANIE DYNAMICZNYCH PÓŁ
     function generateFormFields() {
         const cg = document.getElementById('container_g');
         cg.innerHTML = '';
@@ -243,11 +244,9 @@
         });
     }
 
-    // Wygeneruj pola OD RAZU przed wczytaniem danych
     generateFormFields();
     document.getElementById('data').valueAsDate = new Date();
 
-    // --- LOGIKA CACHE ---
     function saveToLocalStorage() {
         const data = {};
         document.querySelectorAll('.auto-save').forEach(el => {
@@ -293,16 +292,11 @@
         e.returnValue = '';
     });
 
-    // ABSOLUTNE BEZPOŚREDNIE CZYSZCZENIE KAŻDEGO POLE PO KOLEI
     function clearForm() {
         if (confirm("Czy na pewno chcesz wyczyścić cały formularz? Wszystkie wprowadzone dane zostaną usunięte.")) {
-            // 1. Usunięcie z cache
             localStorage.removeItem('bpn_form_cache');
-            
-            // 2. Czyszczenie domyślne HTML
             document.getElementById('bpn-main-form').reset();
 
-            // 3. Ręczne wyzerowanie absolutnie każdego elementu formularza
             const allInputs = document.querySelectorAll('#bpn-main-form input, #bpn-main-form select, #bpn-main-form textarea');
             allInputs.forEach(el => {
                 if (el.type === 'checkbox') {
@@ -316,15 +310,11 @@
                 }
             });
 
-            // 4. Ponowne przywrócenie dzisiejszej daty
             document.getElementById('data').valueAsDate = new Date();
-
-            // 5. Zapisanie czystego stanu
             saveToLocalStorage();
         }
     }
 
-    // Wczytaj dane zapisane po wygenerowaniu struktur
     loadFromLocalStorage();
 
     function downloadCSV() {
